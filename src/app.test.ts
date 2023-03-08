@@ -1,7 +1,9 @@
-import { hello } from './app';
+import request from 'supertest';
+import app from './app.js';
 
-describe('Config example verification', () => {
-  test('Hello must have content', () => {
-    expect(hello.hello).toBe('Hello world');
+describe('Given an app', () => {
+  test('When the server is deployed, the app should respond with a message', async () => {
+    const res = await request(app).get('/');
+    expect(res.body).toEqual('Hello world');
   });
 });
